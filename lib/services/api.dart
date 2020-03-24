@@ -32,7 +32,6 @@ class Api {
     if (response.statusCode == 200) {
       final parsed =
           json.decode(response.body)['results'].cast<Map<String, dynamic>>();
-      print(parsed);
       return parsed
           .map<FeaturedMovieModel>((json) => FeaturedMovieModel.fromJson(json))
           .toList();
