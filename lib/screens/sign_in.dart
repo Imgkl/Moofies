@@ -3,10 +3,10 @@ import 'package:moofies/auth/auth.dart';
 import 'package:moofies/services/prefs.dart';
 
 
-class Home extends StatelessWidget {
+class SignIn extends StatelessWidget {
   final apptitle;
 
-  const Home({Key key, this.apptitle}) : super(key: key);
+  const SignIn({Key key, this.apptitle}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

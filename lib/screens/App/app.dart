@@ -3,16 +3,21 @@ import 'package:line_icons/line_icons.dart';
 import 'package:moofies/models/feature_movies_model.dart';
 import 'package:moofies/models/genre_model.dart';
 import 'package:moofies/screens/App/feature.dart';
+import 'package:moofies/screens/App/home.dart';
+import 'package:moofies/screens/App/profile.dart';
+import 'package:moofies/screens/App/search.dart';
+import 'package:moofies/screens/sign_in.dart';
 import 'package:moofies/services/api.dart';
 
 class App extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _AppState createState() => _AppState();
 }
 
-class _HomeState extends State<App> {
+class _AppState extends State<App> {
   Future<List<FeaturedMovieModel>> featuredMovies;
   Future<List<GenreModel>> genreList;
+  PageController _controller = PageController(initialPage: 0);
   Api _api;
   @override
   void initState() {
@@ -26,27 +31,20 @@ class _HomeState extends State<App> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        title: Text(""),
         centerTitle: true,
       ),
-      body: FutureBuilder<List<FeaturedMovieModel>>(
-        future: featuredMovies,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Padding(
-              padding: const EdgeInsets.only(left: 10.0),
-              child: HomePageFeaturedWidget(snapshot: snapshot),
-            );
-          } else {
-            return Center(
-                child: CircularProgressIndicator(
-              strokeWidth: 1,
-            ));
-          }
-        },
+      body: PageView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: _controller,
+        children: <Widget>[
+          Home(),
+          Search(),
+          Profile(),
+        ],
       ),
       bottomNavigationBar: BottomAppBar(
         child: Container(
@@ -56,17 +54,38 @@ class _HomeState extends State<App> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[Icon(LineIcons.home), Text("Home")],
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _controller.jumpToPage(0);
+                    });
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[Icon(LineIcons.home), Text("Home")],
+                  ),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[Icon(LineIcons.search), Text("Explore")],
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _controller.jumpToPage(1);
+                    });
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[Icon(LineIcons.search), Text("Explore")],
+                  ),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[Icon(LineIcons.user), Text("You")],
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _controller.jumpToPage(2);
+                    });
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[Icon(LineIcons.user), Text("You")],
+                  ),
                 ),
               ],
             ),

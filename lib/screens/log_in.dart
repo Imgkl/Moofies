@@ -13,7 +13,7 @@ class LogIn extends StatelessWidget {
           onPressed: () {
             signInWithGoogle().whenComplete((){
               LocalStorage.setUserLoggedIn(true);
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Home(apptitle: "Moofies")));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> SignIn(apptitle: "Moofies")));
             });
           },
         ),
