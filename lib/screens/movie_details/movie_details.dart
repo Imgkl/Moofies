@@ -57,9 +57,13 @@ class _MovieDetailsState extends State<MovieDetails> {
                       );
                     }
                     if (snapshot.hasError) {
-                      return CircularProgressIndicator();
+                      return CircularProgressIndicator(
+                        strokeWidth: 1,
+                      );
                     }
-                    return CircularProgressIndicator();
+                    return CircularProgressIndicator(
+                      strokeWidth: 1,
+                    );
                   }),
             ],
           ),

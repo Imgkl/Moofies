@@ -38,12 +38,15 @@ class _GenreTagLineState extends State<GenreTagLine> {
                 widget.snapshot.data.genre.length,
                 (i) {
                   return TextSpan(
-                      text: " | ${widget.snapshot.data.genre[i]['name']} | ",
+                      text: " | ${widget.snapshot.data.genre[i]['name']} | " ,
+                      
                       style: TextStyle(color: Colors.white, fontSize: 14));
                 },
               ),
               style: Theme.of(context).textTheme.caption,
             ),
+              textAlign: TextAlign.center,
+
           ),
         ),
       ],
