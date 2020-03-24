@@ -13,10 +13,21 @@ class _GenreTagLineState extends State<GenreTagLine> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Center(
+            child: Text(
+              "${widget.snapshot.data.original_title}",
+              style: TextStyle(color: Colors.white, fontSize: 30),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
         widget.snapshot.data.tagLine.length > 0
             ? Text(
                 "${widget.snapshot.data.tagLine}",
                 style: TextStyle(color: Colors.white, fontSize: 17),
+                textAlign: TextAlign.center,
               )
             : Container(),
         Padding(

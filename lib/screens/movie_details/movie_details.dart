@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:moofies/screens/movie_details/about.dart';
 import 'package:moofies/screens/movie_details/bottom_nav.dart';
 import 'package:moofies/screens/movie_details/fab_button.dart';
 import 'package:moofies/screens/movie_details/genre_and_tag_line.dart';
+import 'package:moofies/screens/movie_details/rating_bar.dart';
 import 'package:moofies/screens/movie_details/release_info.dart';
 import 'package:moofies/services/api.dart';
 import 'bg_image.dart';
@@ -48,6 +50,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                       return Column(
                         children: <Widget>[
                           GenreTagLine(snapshot: snapshot),
+                          Rating(snapshot: snapshot),
                           ReleaseInfo(snapshot: snapshot),
                           About(snapshot: snapshot),
                         ],

@@ -30,15 +30,6 @@ class _BgImageState extends State<BgImage> {
           ),
           tag: widget.snapshot.data[widget.id],
         ),
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Center(
-            child: Text(
-              "${widget.snapshot.data[widget.id].originalTitle}",
-              style: TextStyle(color: Colors.white, fontSize: 30),
-            ),
-          ),
-        ),
       ],
     );
   }
