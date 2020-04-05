@@ -23,7 +23,7 @@ class FeaturedMovieModel {
   factory FeaturedMovieModel.fromJson(Map<String, dynamic> json) {
     return FeaturedMovieModel(
       lang: json['original_language'],
-      originalTitle: json['original_title'],
+      originalTitle: json['title'],
       overview: json['overview'],
       posterPath: json['poster_path'],
       id: json['id'],

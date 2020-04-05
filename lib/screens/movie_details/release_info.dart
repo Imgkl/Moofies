@@ -21,23 +21,23 @@ class _ReleaseInfoState extends State<ReleaseInfo> {
               children: <Widget>[
                 Icon(
                   LineIcons.calendar,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 Text(
-                    " ${DateTime.parse(widget.snapshot.data.releaseDate).year}",
+                    widget.snapshot.data.releaseDate != " " ? "${DateTime.parse(widget.snapshot.data.releaseDate).year}" : "NA",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                     )),
                 SizedBox(
                   width: 20,
                 ),
                 Icon(
                   LineIcons.clock_o,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
                 Text(" ${widget.snapshot.data.runTime} minutes",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                     )),
               ],
             ),

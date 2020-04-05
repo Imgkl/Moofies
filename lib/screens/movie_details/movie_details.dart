@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:moofies/screens/movie_details/about.dart';
-import 'package:moofies/screens/movie_details/bottom_nav.dart';
-import 'package:moofies/screens/movie_details/fab_button.dart';
-import 'package:moofies/screens/movie_details/genre_and_tag_line.dart';
-import 'package:moofies/screens/movie_details/rating_bar.dart';
-import 'package:moofies/screens/movie_details/release_info.dart';
+import 'package:moofies/screens/movie_details/custom_sheet.dart';
 import 'package:moofies/services/api.dart';
 import 'bg_image.dart';
 
@@ -32,47 +26,72 @@ class _MovieDetailsState extends State<MovieDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              BgImage(
-                snapshot: widget.snapshot,
-                id: widget.id,
-              ),
-              FutureBuilder(
-                  future: movieDetails,
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
-                      return CircularProgressIndicator();
-                    }
-                    if (snapshot.hasData) {
-                      return Column(
-                        children: <Widget>[
-                          GenreTagLine(snapshot: snapshot),
-                          Rating(snapshot: snapshot),
-                          ReleaseInfo(snapshot: snapshot),
-                          About(snapshot: snapshot),
-                        ],
-                      );
-                    }
-                    if (snapshot.hasError) {
-                      return CircularProgressIndicator(
-                        strokeWidth: 1,
-                      );
-                    }
-                    return CircularProgressIndicator(
-                      strokeWidth: 1,
-                    );
-                  }),
-            ],
+      backgroundColor: Colors.black,
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          FractionallySizedBox(
+            alignment: Alignment.topCenter,
+            heightFactor: 0.85,
+            child: BgImage(
+              snapshot: widget.snapshot,
+              id: widget.id,
+            ),
           ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FabButton(),
-        bottomNavigationBar: BottomAppBar(
-            shape: CircularNotchedRectangle(),
-            notchMargin: 5.0,
-            child: BottomBar()));
+          FractionallySizedBox(
+            // alignment: Alignment.bottomCenter,
+            // heightFactor: 0.45,
+            // child: Material(
+            //   color: Colors.transparent,
+            //   elevation: 3,
+            //   child: Container(
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.only(
+            //           topLeft: Radius.circular(40),
+            //           topRight: Radius.circular(40)),
+            //       color: Colors.white,
+            //     ),
+            //  child: FutureBuilder(
+            //    future: movieDetails,
+            //    builder: (context, snapshot) {
+            //      if (!snapshot.hasData) {
+            //        return CircularProgressIndicator();
+            //      }
+            //      if (snapshot.hasData) {
+            //        return Column(
+            //          children: <Widget>[
+            //            GenreTagLine(snapshot: snapshot),4
+            //            Rating(snapshot: snapshot),
+            //            ReleaseInfo(snapshot: snapshot),
+            //            About(snapshot: snapshot),
+            //          ],
+            //        );
+            //      }
+            //      if (snapshot.hasError) {
+            //        return CircularProgressIndicator(
+            //          strokeWidth: 1,
+            //        );
+            //      }
+            //      return CircularProgressIndicator(
+            //        strokeWidth: 1,
+            //      );
+            //    }),
+            child: CustomBottomSheet(
+              moviedetail: movieDetails,
+            ),
+            // ),
+            // ),
+          ),
+        ],
+      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton: FabButton(),
+      // bottomNavigationBar: BottomAppBar(
+      //     shape: CircularNotchedRectangle(),
+      //     notchMargin: 5.0,
+      //     child: BottomBar())
+    );
   }
 }
+
+

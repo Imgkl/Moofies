@@ -16,21 +16,17 @@ class _BgImageState extends State<BgImage> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-    return Column(
-      children: <Widget>[
-        Hero(
-          child: ShimmerImage(
-            shaderAvailable: true,
-            imageUrl: Api().getPosterImage(
-                "${widget.snapshot.data[widget.id].posterPath}"),
-            cornerRadius: 0,
-            height: screenHeight * 0.6,
-            width: screenWidth,
-            fit: BoxFit.cover,
-          ),
-          tag: widget.snapshot.data[widget.id],
-        ),
-      ],
+    return Hero(
+      child: ShimmerImage(
+        shaderAvailable: true,
+        imageUrl:widget.snapshot.data[widget.id].posterPath!= null ? Api().getPosterImageOriginal(
+            "${widget.snapshot.data[widget.id].posterPath}"): "https://kicksdigitalmarketing.com/wp-content/uploads/2019/09/iStock-1142986365.jpg",
+        cornerRadius: 0,
+        height: screenHeight * 0.85,
+        width: screenWidth,
+        fit: BoxFit.cover,
+      ),
+      tag: widget.snapshot.data[widget.id],
     );
   }
 }
