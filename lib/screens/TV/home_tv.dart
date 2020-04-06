@@ -1,9 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moofies/models/feature_movies_model.dart';
 import 'package:moofies/models/genre_model.dart';
-import 'package:moofies/screens/details/movie_details.dart';
+import 'package:moofies/screens/TV/discover_tv.dart';
+import 'package:moofies/screens/trending_tv.dart';
 import 'package:moofies/services/api.dart';
-import 'package:moofies/widgets/shimmer_effect.dart';
 import 'package:preload_page_view/preload_page_view.dart';
 
 class HomeTV extends StatefulWidget {
@@ -49,12 +50,39 @@ class _HomeState extends State<HomeTV> {
       }
     }
   }
+  final Map<int, Widget> logoWidgets = const <int, Widget>{
+    0: Padding(padding: EdgeInsets.all(8), child: Text('Trending'),),
+    1: Text('Discover'),
+  };
+
+  final Map<int, Widget> icons =  <int, Widget>{
+    0: TrendingTv(
+      type: "tv",
+    ),
+    1: DiscoverTV(),
+  };
+  int sharedValue = 0;
+
 
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         extendBody: true,
+        appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: CupertinoSegmentedControl<int>(
+          borderColor: Colors.black,
+          selectedColor: Colors.black,
+          children: logoWidgets,
+          onValueChanged: (int val) {
+            setState(() {
+              sharedValue = val;
+            });
+          },
+          groupValue: sharedValue,
+        ),
+      ),
         // body: FutureBuilder<List<FeaturedMovieModel>>(
         //   future: featuredMovies,
         //   builder: (context, snapshot) {
@@ -71,62 +99,7 @@ class _HomeState extends State<HomeTV> {
         //     }
         //   },
         // ),
-        body: PreloadPageView.builder(
-            controller:
-                PreloadPageController(viewportFraction: 0.7, initialPage: 2),
-            itemCount: 4,
-            preloadPagesCount: 4,
-            itemBuilder: (context, mainIndex) {
-              return PreloadPageView.builder(
-                  itemCount: 5,
-                  preloadPagesCount: 5,
-                  controller: controllers[mainIndex],
-                  scrollDirection: Axis.vertical,
-                  physics: ClampingScrollPhysics(),
-                  onPageChanged: (page) {
-                    _animatePage(page, mainIndex);
-                  },
-                  itemBuilder: (context, index) {
-                    var hitIndex = (mainIndex * 5) + index;
-
-                    return FutureBuilder<List<FeaturedMovieModel>>(
-                      future: featuredMovies,
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => MovieDetails(
-                                          snapshot: snapshot,
-                                          type: "tv",
-                                          id: hitIndex,
-                                        )));
-                              },
-                              child: Hero(
-                                tag: snapshot.data[hitIndex],
-                                child: ShimmerImage(
-                                  shaderAvailable: false,
-                                  imageUrl: Api().getPosterImage(
-                                      snapshot.data[hitIndex].posterPath),
-                                  height: screenHeight * 0.45,
-                                  width: screenWidth * 0.7,
-                                  cornerRadius: 25,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          );
-                        } else {
-                          return Center(
-                              child: CircularProgressIndicator(
-                            strokeWidth: 1,
-                          ));
-                        }
-                      },
-                    );
-                  });
-            }));
+             body: icons[sharedValue],
+        );
   }
 }

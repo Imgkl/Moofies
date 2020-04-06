@@ -37,12 +37,7 @@ class _AppState extends State<App> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
 
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          
-        ),
+        
         body: PageView(
           physics: NeverScrollableScrollPhysics(),
           controller: _controller,
