@@ -23,7 +23,7 @@ class MovieModel {
       poster_path: json['poster_path'] ,
       id: json['id'] ,
       country: json['production_companies'][0]['origin_country'],
-      releaseDate: json['release_date'],
+      releaseDate: json['release_date']!= null ? json['release_date']: json['first_air_date'],
       runTime: json['runtime'],
       genre: json['genres'],
       rating: json['vote_average']

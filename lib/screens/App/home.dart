@@ -16,37 +16,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  @override
-  Future<List<FeaturedMovieModel>> featuredMovies;
-  List<PreloadPageController> controllers = [];
-  Future<List<GenreModel>> genreList;
-  Api _api;
-  ScrollController _scrollController =
-      ScrollController(initialScrollOffset: 50.0);
-
-  @override
-  void initState() {
-    super.initState();
-    _api = Api();
-    controllers = [
-      PreloadPageController(viewportFraction: 0.6, initialPage: 3),
-      PreloadPageController(viewportFraction: 0.6, initialPage: 3),
-      PreloadPageController(viewportFraction: 0.6, initialPage: 3),
-      PreloadPageController(viewportFraction: 0.6, initialPage: 3),
-      PreloadPageController(viewportFraction: 0.6, initialPage: 3),
-    ];
-    featuredMovies = _api.getFeaturedMovies(widget.type);
-    genreList = _api.getGenreList();
-  }
-
-  _animatePage(int page, int index) {
-    for (int i = 0; i < 4; i++) {
-      if (i != index) {
-        controllers[i].animateToPage(page,
-            duration: Duration(milliseconds: 300), curve: Curves.ease);
-      }
-    }
-  }
 
   final Map<int, Widget> logoWidgets = const <int, Widget>{
     0: Padding(padding: EdgeInsets.all(8), child: Text('Trending'),),
@@ -60,10 +29,8 @@ class _HomeState extends State<Home> {
     1: DiscoverMovie(),
   };
   int sharedValue = 0;
-
+    @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBody: true,

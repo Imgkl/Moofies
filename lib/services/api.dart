@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:moofies/models/feature_movies_model.dart';
 import 'package:moofies/models/genre_model.dart';
 import 'package:moofies/models/movie_model.dart';
+import 'package:moofies/models/recommedation_model.dart';
 import 'package:moofies/models/search_model.dart';
 
 
@@ -58,6 +59,20 @@ class Api {
     }
   }
 
+
+Future<List<RecommendationModel>> getRecommendations(String type, int id) async {
+    final response = await http.get('$url/$type/$id/recommendations?api_key=$apiKey');
+
+    if (response.statusCode == 200) {
+      final parsed =
+          json.decode(response.body)['results'].cast<Map<String, dynamic>>();
+      return parsed
+          .map<RecommendationModel>((json) => RecommendationModel.fromJson(json))
+          .toList();
+    } else {
+      throw Exception('Failed to load featured movies');
+    }
+  }
   
 
   Future<MovieModel> getMovieInfo(int movieId, String type) async {

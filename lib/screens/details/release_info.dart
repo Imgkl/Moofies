@@ -12,7 +12,7 @@ class ReleaseInfo extends StatefulWidget {
 class _ReleaseInfoState extends State<ReleaseInfo> {
   @override
   Widget build(BuildContext context) {
-    return widget.snapshot.data.runTime != null &&
+    return 
             widget.snapshot.data.releaseDate != null
         ? Padding(
             padding: const EdgeInsets.all(8.0),
@@ -31,7 +31,9 @@ class _ReleaseInfoState extends State<ReleaseInfo> {
                 SizedBox(
                   width: 20,
                 ),
-                Icon(
+              widget.snapshot.data.runTime !=null?  Row(
+                  children: <Widget>[
+                    Icon(
                   LineIcons.clock_o,
                   color: Colors.black,
                 ),
@@ -39,6 +41,8 @@ class _ReleaseInfoState extends State<ReleaseInfo> {
                     style: TextStyle(
                       color: Colors.black,
                     )),
+                  ],
+                ): Container()
               ],
             ),
           )

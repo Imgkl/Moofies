@@ -82,6 +82,7 @@ class _MovieDetailsState extends State<MovieDetails> {
             //      );
             //    }),
             child: CustomBottomSheet(
+              type: widget.type,
               moviedetail: movieDetails,
             ),
             // ),

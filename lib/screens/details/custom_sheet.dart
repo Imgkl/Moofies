@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:moofies/screens/details/genre_and_tag_line.dart';
 import 'package:moofies/screens/details/about.dart';
 import 'package:moofies/screens/details/rating_bar.dart';
+import 'package:moofies/screens/details/recommendation.dart';
 import 'package:moofies/screens/details/release_info.dart';
 
 class CustomBottomSheet extends StatefulWidget {
   final moviedetail;
+  final type;
 
-  const CustomBottomSheet({Key key, this.moviedetail}) : super(key: key);
+  const CustomBottomSheet({Key key, this.moviedetail, this.type})
+      : super(key: key);
   @override
   _CustomBottomSheetState createState() => _CustomBottomSheetState();
 }
@@ -46,7 +49,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet>
     return Stack(
       children: <Widget>[
         Positioned(
-          top: animation.value != null? animation.value: 100,
+          top: animation.value != null ? animation.value : 100,
           left: 0,
           child: GestureDetector(
             // onVerticalDragEnd: (DragEndDetails dragEndDetails) {
@@ -58,25 +61,23 @@ class _CustomBottomSheetState extends State<CustomBottomSheet>
             //     return;
             //   }
             // },
-            onTap: (){
-              if(isExpanded){
-                 _controller.forward();
-                 setState(() {
-                   isExpanded = !isExpanded;
-                 });
-              }
-              else if(!isExpanded){
+            onTap: () {
+              if (isExpanded) {
+                _controller.forward();
+                setState(() {
+                  isExpanded = !isExpanded;
+                });
+              } else if (!isExpanded) {
                 _controller.reverse();
-                 setState(() {
-                   isExpanded = !isExpanded;
-                 });
-              }
-              else{
+                setState(() {
+                  isExpanded = !isExpanded;
+                });
+              } else {
                 return;
               }
-
             },
             child: SheetContainer(
+              type: widget.type,
               movieDetails: widget.moviedetail,
             ),
           ),
@@ -88,8 +89,10 @@ class _CustomBottomSheetState extends State<CustomBottomSheet>
 
 class SheetContainer extends StatefulWidget {
   final movieDetails;
+  final type;
 
-  const SheetContainer({Key key, this.movieDetails}) : super(key: key);
+  const SheetContainer({Key key, this.movieDetails, this.type})
+      : super(key: key);
 
   @override
   _SheetContainerState createState() => _SheetContainerState();
@@ -117,12 +120,13 @@ class _SheetContainerState extends State<SheetContainer> {
                 }
                 if (snapshot.hasData) {
                   return SingleChildScrollView(
-                                      child: Column(
+                    child: Column(
                       children: <Widget>[
                         GenreTagLine(snapshot: snapshot),
                         Rating(snapshot: snapshot),
                         ReleaseInfo(snapshot: snapshot),
-                        About(snapshot: snapshot)
+                        About(snapshot: snapshot),
+                        Recommendation(iD: snapshot.data.id, type: widget.type)
                       ],
                     ),
                   );
