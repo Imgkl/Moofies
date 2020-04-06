@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:moofies/models/feature_movies_model.dart';
-import 'package:moofies/screens/movie_details/movie_details.dart';
+import 'package:moofies/screens/details/movie_details.dart';
 import 'package:moofies/services/api.dart';
 import 'package:moofies/widgets/shimmer_effect.dart';
 

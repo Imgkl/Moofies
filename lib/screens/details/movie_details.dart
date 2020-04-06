@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moofies/screens/movie_details/custom_sheet.dart';
+import 'package:moofies/screens/details/custom_sheet.dart';
 import 'package:moofies/services/api.dart';
 import 'bg_image.dart';
 

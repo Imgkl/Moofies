@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:moofies/models/feature_movies_model.dart';
 import 'package:moofies/models/genre_model.dart';
-import 'package:moofies/screens/App/feature.dart';
 import 'package:moofies/screens/App/home.dart';
 import 'package:moofies/screens/App/profile.dart';
 import 'package:moofies/screens/App/search.dart';
 import 'package:moofies/screens/TV/home_tv.dart';
 import 'package:moofies/screens/TV/search_tv.dart';
-import 'package:moofies/screens/sign_in.dart';
 import 'package:moofies/services/api.dart';
 
 class App extends StatefulWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:moofies/screens/movie_details/genre_and_tag_line.dart';
-import 'package:moofies/screens/movie_details/about.dart';
-import 'package:moofies/screens/movie_details/rating_bar.dart';
-import 'package:moofies/screens/movie_details/release_info.dart';
+import 'package:moofies/screens/details/genre_and_tag_line.dart';
+import 'package:moofies/screens/details/about.dart';
+import 'package:moofies/screens/details/rating_bar.dart';
+import 'package:moofies/screens/details/release_info.dart';
 
 class CustomBottomSheet extends StatefulWidget {
   final moviedetail;

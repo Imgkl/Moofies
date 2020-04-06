@@ -4,7 +4,7 @@ import 'package:moofies/models/feature_movies_model.dart';
 import 'package:moofies/models/genre_model.dart';
 import 'package:moofies/models/movie_model.dart';
 import 'package:moofies/models/search_model.dart';
-import 'package:moofies/models/trending_tv.dart';
+
 
 class Api {
   var httpClient = http.Client();

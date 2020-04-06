@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moofies/screens/App/app.dart';
-import 'package:moofies/screens/movie_details/movie_details.dart';
+
 
 
 void main() => runApp(MyApp());
