@@ -17,6 +17,7 @@ class _BgImageState extends State<BgImage> {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return Hero(
+      tag:  widget.snapshot.data[widget.id],
       child: ShimmerImage(
         shaderAvailable: true,
         imageUrl:widget.snapshot.data[widget.id].posterPath!= null ? Api().getPosterImageOriginal(
@@ -25,8 +26,7 @@ class _BgImageState extends State<BgImage> {
         height: screenHeight * 0.85,
         width: screenWidth,
         fit: BoxFit.cover,
-      ),
-      tag: widget.snapshot.data[widget.id],
+    )
     );
   }
 }

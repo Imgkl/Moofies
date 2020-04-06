@@ -6,15 +6,15 @@ import 'package:moofies/services/api.dart';
 import 'package:moofies/widgets/shimmer_effect.dart';
 import 'package:preload_page_view/preload_page_view.dart';
 
-class Home extends StatefulWidget {
+class HomeTV extends StatefulWidget {
   final type;
 
-  const Home({Key key, this.type}) : super(key: key);
+  const HomeTV({Key key, this.type}) : super(key: key);
   @override
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<HomeTV> {
 
 
   @override
@@ -54,7 +54,6 @@ class _HomeState extends State<Home> {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
         extendBody: true,
         // body: FutureBuilder<List<FeaturedMovieModel>>(
         //   future: featuredMovies,
@@ -100,8 +99,8 @@ class _HomeState extends State<Home> {
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => MovieDetails(
-                                      type: "movie",
                                           snapshot: snapshot,
+                                          type: "tv",
                                           id: hitIndex,
                                         )));
                               },
@@ -119,10 +118,7 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                           );
-                        } else if(snapshot.hasError){
-                          return Text(snapshot.error.toString());
-                        }
-                        else {
+                        } else {
                           return Center(
                               child: CircularProgressIndicator(
                             strokeWidth: 1,

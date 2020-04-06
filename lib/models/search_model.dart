@@ -14,7 +14,7 @@ class SearchModel {
       this.overView});
   factory SearchModel.fromJson(Map<String, dynamic> json) {
     return SearchModel(
-      originalTitle: json['title'],
+      originalTitle: json['title'] != null ? json['title'] : json['name'],
       overview: json['overview'],
       posterPath: json['poster_path'] ,
       id: json['id'] ,

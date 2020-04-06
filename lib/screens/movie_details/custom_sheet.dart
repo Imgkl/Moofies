@@ -46,7 +46,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet>
     return Stack(
       children: <Widget>[
         Positioned(
-          top: animation.value ?? animation.value,
+          top: animation.value != null? animation.value: 100,
           left: 0,
           child: GestureDetector(
             // onVerticalDragEnd: (DragEndDetails dragEndDetails) {

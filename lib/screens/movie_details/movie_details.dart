@@ -6,8 +6,10 @@ import 'bg_image.dart';
 class MovieDetails extends StatefulWidget {
   final AsyncSnapshot snapshot;
   final id;
+  final type;
 
-  const MovieDetails({Key key, this.snapshot, this.id}) : super(key: key);
+  const MovieDetails({Key key, this.snapshot, this.id, this.type})
+      : super(key: key);
   @override
   _MovieDetailsState createState() => _MovieDetailsState();
 }
@@ -20,12 +22,15 @@ class _MovieDetailsState extends State<MovieDetails> {
   void initState() {
     super.initState();
     _api = Api();
-    movieDetails = _api.getMovieInfo(widget.snapshot.data[widget.id].id);
+    movieDetails =
+        _api.getMovieInfo(widget.snapshot.data[widget.id].id, widget.type);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+
       backgroundColor: Colors.black,
       body: Stack(
         fit: StackFit.expand,
@@ -93,5 +98,3 @@ class _MovieDetailsState extends State<MovieDetails> {
     );
   }
 }
-
-

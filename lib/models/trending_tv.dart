@@ -1,4 +1,4 @@
-class FeaturedMovieModel {
+class TrendingTVModel {
   final String originalTitle, overview, posterPath, country, releaseDate, lang;
   final int id, runTime;
   final double rating;
@@ -7,7 +7,7 @@ class FeaturedMovieModel {
 
 
 
-  FeaturedMovieModel(
+  TrendingTVModel(
       {this.country,
       this.rating,
       this.genre,
@@ -21,8 +21,8 @@ class FeaturedMovieModel {
 
 
 
-  factory FeaturedMovieModel.fromJson(Map<String, dynamic> json) {
-    return FeaturedMovieModel(
+  factory TrendingTVModel.fromJson(Map<String, dynamic> json) {
+    return TrendingTVModel(
       lang: json['original_language'],
       originalTitle: json['title'],
       overview: json['overview'],

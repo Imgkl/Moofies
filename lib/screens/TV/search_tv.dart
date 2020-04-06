@@ -5,15 +5,15 @@ import 'package:moofies/models/search_model.dart';
 import 'package:moofies/screens/movie_details/movie_details.dart';
 import 'package:moofies/services/api.dart';
 
-class Search extends StatefulWidget {
+class SearchTV extends StatefulWidget {
   final type;
 
-  const Search({Key key, this.type}) : super(key: key);
+  const SearchTV({Key key, this.type}) : super(key: key);
   @override
   _SearchState createState() => _SearchState();
 }
 
-class _SearchState extends State<Search> {
+class _SearchState extends State<SearchTV> {
   Future<List<SearchModel>> searchMovies;
   TextEditingController controllerText = TextEditingController();
   @override
@@ -43,7 +43,7 @@ class _SearchState extends State<Search> {
                       ),
                     )
                   : Text(" "),
-              hintText: "Search term here",
+              hintText: "SearchTV term here",
               disabledBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
               focusedBorder: InputBorder.none,

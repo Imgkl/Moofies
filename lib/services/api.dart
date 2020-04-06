@@ -4,6 +4,7 @@ import 'package:moofies/models/feature_movies_model.dart';
 import 'package:moofies/models/genre_model.dart';
 import 'package:moofies/models/movie_model.dart';
 import 'package:moofies/models/search_model.dart';
+import 'package:moofies/models/trending_tv.dart';
 
 class Api {
   var httpClient = http.Client();
@@ -27,8 +28,8 @@ class Api {
     }
   }
 
-   Future<List<SearchModel>> serach(String searchTerm) async {
-    final response = await http.get('$url/search/movie?api_key=$apiKey&language=en-US&query=$searchTerm&page=1&include_adult=false');
+   Future<List<SearchModel>> serach(String searchTerm, String type) async {
+    final response = await http.get('$url/search/$type?api_key=$apiKey&query=$searchTerm&page=1&include_adult=false');
 
     if (response.statusCode == 200) {
       final parsed =
@@ -43,8 +44,8 @@ class Api {
     }
   }
 
-  Future<List<FeaturedMovieModel>> getFeaturedMovies() async {
-    final response = await http.get('$url/trending/movie/day?api_key=$apiKey');
+  Future<List<FeaturedMovieModel>> getFeaturedMovies(String type) async {
+    final response = await http.get('$url/trending/$type/day?api_key=$apiKey');
 
     if (response.statusCode == 200) {
       final parsed =
@@ -57,8 +58,10 @@ class Api {
     }
   }
 
-  Future<MovieModel> getMovieInfo(int movieId) async {
-    final response = await http.get("$url/movie/$movieId?api_key=$apiKey");
+  
+
+  Future<MovieModel> getMovieInfo(int movieId, String type) async {
+    final response = await http.get("$url/$type/$movieId?api_key=$apiKey");
 
     if (response.statusCode == 200) {
       return MovieModel.fromJson(json.decode(response.body));

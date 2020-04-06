@@ -21,26 +21,26 @@ class HomePageFeaturedWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              "Trending",
-              style: TextStyle(fontSize: 30),
-            ),
-            Container(
-              width: 50,
-              child: Divider(
-                thickness: 3,
-              ),
-            )
-          ],
-        ),
-        SizedBox(
-          height: screenHeight * 0.03,
-        ),
+        // Column(
+        //   crossAxisAlignment: CrossAxisAlignment.start,
+        //   children: <Widget>[
+        //     // Text(
+        //     //   "Trending",
+        //     //   style: TextStyle(fontSize: 30),
+        //     // ),
+        //     // Container(
+        //     //   width: 50,
+        //     //   child: Divider(
+        //     //     thickness: 3,
+        //     //   ),
+        //     // )
+        //   ],
+        // ),
+        // SizedBox(
+        //   height: screenHeight * 0.03,
+        // ),
         Container(
-          height: screenHeight * 0.55,
+          height: screenHeight * 0.4,
           child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
@@ -59,55 +59,52 @@ class HomePageFeaturedWidget extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Hero(
-                          tag: snapshot.data[id],
-                          child: ShimmerImage(
-                            shaderAvailable: false,
-                            imageUrl: Api()
-                                .getPosterImage(snapshot.data[id].posterPath),
-                            height: screenHeight * 0.45,
-                            width: screenWidth * 0.6,
-                            cornerRadius: 25,
-                            fit: BoxFit.cover,
-                          ),
+                        ShimmerImage(
+                          shaderAvailable: false,
+                          imageUrl: Api()
+                              .getPosterImage(snapshot.data[id].posterPath),
+                          height: screenHeight * 0.4,
+                          width: screenWidth * 0.6,
+                          cornerRadius: 25,
+                          fit: BoxFit.cover,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10.0, left: 15),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Container(
-                                  width: screenWidth * 0.6,
-                                  child: Text(
-                                    "${snapshot.data[id].originalTitle}",
-                                    style: TextStyle(fontSize: 15),
-                                  )),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    Text("${snapshot.data[id].lang} | "
-                                        .toUpperCase()),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Icon(
-                                          LineIcons.star,
-                                          size: 15,
-                                          color: Colors.yellow,
-                                        ),
-                                        Text(" ${snapshot.data[id].rating}"),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        )
+                        // Padding(
+                        //   padding: const EdgeInsets.only(top: 10.0, left: 15),
+                        //   child: Column(
+                        //     crossAxisAlignment: CrossAxisAlignment.start,
+                        //     children: <Widget>[
+                        //       Container(
+                        //           width: screenWidth * 0.6,
+                        //           child: Text(
+                        //             "${snapshot.data[id].originalTitle}",
+                        //             style: TextStyle(fontSize: 15),
+                        //           )),
+                        //       Padding(
+                        //         padding: const EdgeInsets.only(top: 8.0),
+                        //         child: Row(
+                        //           mainAxisAlignment:
+                        //               MainAxisAlignment.spaceEvenly,
+                        //           children: <Widget>[
+                        //             Text("${snapshot.data[id].lang} | "
+                        //                 .toUpperCase()),
+                        //             Row(
+                        //               mainAxisAlignment:
+                        //                   MainAxisAlignment.center,
+                        //               children: <Widget>[
+                        //                 Icon(
+                        //                   LineIcons.star,
+                        //                   size: 15,
+                        //                   color: Colors.yellow,
+                        //                 ),
+                        //                 Text(" ${snapshot.data[id].rating}"),
+                        //               ],
+                        //             ),
+                        //           ],
+                        //         ),
+                        //       )
+                        //     ],
+                        //   ),
+                        // )
                       ],
                     ),
                   ),
