@@ -9,17 +9,13 @@ import 'package:preload_page_view/preload_page_view.dart';
 class TrendingTv extends StatefulWidget {
   final type;
 
-  const TrendingTv
-({Key key, this.type}) : super(key: key);
+  const TrendingTv({Key key, this.type}) : super(key: key);
   @override
   _TrendingState createState() => _TrendingState();
 }
 
- 
-
 class _TrendingState extends State<TrendingTv> {
-
-   Future<List<FeaturedMovieModel>> featuredMovies;
+  Future<List<FeaturedMovieModel>> featuredMovies;
   List<PreloadPageController> controllers = [];
   Future<List<GenreModel>> genreList;
   Api _api;
@@ -49,39 +45,42 @@ class _TrendingState extends State<TrendingTv> {
       }
     }
   }
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return PreloadPageView.builder(
-            controller:
-                PreloadPageController(viewportFraction: 0.7, initialPage: 2),
-            itemCount: 4,
-            preloadPagesCount: 4,
-            itemBuilder: (context, mainIndex) {
-              return PreloadPageView.builder(
-                  itemCount: 5,
-                  preloadPagesCount: 5,
-                  controller: controllers[mainIndex],
-                  scrollDirection: Axis.vertical,
-                  physics: ClampingScrollPhysics(),
-                  onPageChanged: (page) {
-                    _animatePage(page, mainIndex);
-                  },
-                  itemBuilder: (context, index) {
-                    var hitIndex = (mainIndex * 5) + index;
+        controller:
+            PreloadPageController(viewportFraction: 0.7, initialPage: 2),
+        itemCount: 4,
+        preloadPagesCount: 4,
+        itemBuilder: (context, mainIndex) {
+          return PreloadPageView.builder(
+              itemCount: 5,
+              preloadPagesCount: 5,
+              controller: controllers[mainIndex],
+              scrollDirection: Axis.vertical,
+              physics: ClampingScrollPhysics(),
+              onPageChanged: (page) {
+                _animatePage(page, mainIndex);
+              },
+              itemBuilder: (context, index) {
+                var hitIndex = (mainIndex * 5) + index;
 
-                    return FutureBuilder<List<FeaturedMovieModel>>(
-                      future: featuredMovies,
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return Padding(
+                return FutureBuilder<List<FeaturedMovieModel>>(
+                  future: featuredMovies,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Stack(
+                        children: <Widget>[
+                          Padding(
                             padding: const EdgeInsets.only(left: 10.0),
                             child: GestureDetector(
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => MovieDetails(
-                                      type: widget.type,
+                                          type: widget.type,
                                           snapshot: snapshot,
                                           id: hitIndex,
                                         )));
@@ -92,29 +91,36 @@ class _TrendingState extends State<TrendingTv> {
                                   shaderAvailable: false,
                                   imageUrl: Api().getPosterImage(
                                       snapshot.data[hitIndex].posterPath),
-                                  height: screenHeight * 0.45,
-                                  width: screenWidth * 0.7,
+                                  height: screenHeight * 0.4,
+                                  width: screenWidth * 0.6,
                                   cornerRadius: 25,
                                   fit: BoxFit.cover,
                                 ),
                               ),
                             ),
-                          );
-                        } else if(snapshot.hasError){
-                          return Text(snapshot.error.toString());
-                        }
-                        else {
-                          return Center(
-                              child: CircularProgressIndicator(
-                            strokeWidth: 1,
-                          ));
-                        }
-                      },
-                    );
-                  });
-
-  }
-    );
+                          ),
+                          // Align(
+                          //     alignment: Alignment.bottomLeft,
+                          //     child: Text(
+                          //       "${hitIndex + 1}".toString(),
+                          //       style: TextStyle(
+                          //         fontSize: 150,
+                          //         foreground: Paint()..color = Colors.black..style = PaintingStyle.stroke..strokeWidth = 3.0,
+                          //       ),
+                          //     )),
+                        ],
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text(snapshot.error.toString());
+                    } else {
+                      return Center(
+                          child: CircularProgressIndicator(
+                        strokeWidth: 1,
+                      ));
+                    }
+                  },
+                );
+              });
+        });
   }
 }
-  

@@ -93,6 +93,7 @@ class _RecommendationState extends State<Recommendation> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   ShimmerImage(
+                                    elevation: 3,
                                     shaderAvailable: false,
                                     imageUrl: Api().getPosterImage(
                                         snapshot.data[index].posterPath),

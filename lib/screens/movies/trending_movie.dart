@@ -91,8 +91,8 @@ class _TrendingMovieState extends State<TrendingMovie> {
                                   shaderAvailable: false,
                                   imageUrl: Api().getPosterImage(
                                       snapshot.data[hitIndex].posterPath),
-                                  height: screenHeight * 0.45,
-                                  width: screenWidth * 0.7,
+                                  height: screenHeight * 0.4,
+                                  width: screenWidth * 0.6,
                                   cornerRadius: 25,
                                   fit: BoxFit.cover,
                                 ),

@@ -5,6 +5,7 @@ import 'package:transparent_image/transparent_image.dart';
 class ShimmerImage extends StatefulWidget {
   final String imageUrl;
   final double width;
+  final double elevation;
   final double height;
   final BoxFit fit;
   final bool shaderAvailable;
@@ -17,7 +18,7 @@ class ShimmerImage extends StatefulWidget {
       this.height,
       this.fit,
       this.cornerRadius,
-      this.shaderAvailable})
+      this.shaderAvailable, this.elevation = 0})
       : super(key: key);
   @override
   _ShimmerImageState createState() => _ShimmerImageState();
@@ -27,7 +28,7 @@ class _ShimmerImageState extends State<ShimmerImage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      elevation: 0,
+      elevation: widget.elevation,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(widget.cornerRadius),
       ),
