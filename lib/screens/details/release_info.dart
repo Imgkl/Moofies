@@ -24,7 +24,7 @@ class _ReleaseInfoState extends State<ReleaseInfo> {
                   color: Colors.black,
                 ),
                 Text(
-                    widget.snapshot.data.releaseDate != " " ? "${DateTime.parse(widget.snapshot.data.releaseDate).year}" : "NA",
+                    widget.snapshot.data.releaseDate != "" || widget.snapshot.data.releaseDate != " " ? "${DateTime.parse(widget.snapshot.data.releaseDate).year}" : "NA",
                     style: TextStyle(
                       color: Colors.black,
                     )),

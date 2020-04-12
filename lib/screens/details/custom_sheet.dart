@@ -1,15 +1,21 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:moofies/screens/details/genre_and_tag_line.dart';
 import 'package:moofies/screens/details/about.dart';
 import 'package:moofies/screens/details/rating_bar.dart';
 import 'package:moofies/screens/details/recommendation.dart';
 import 'package:moofies/screens/details/release_info.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 class CustomBottomSheet extends StatefulWidget {
   final moviedetail;
   final type;
+  final id;
 
-  const CustomBottomSheet({Key key, this.moviedetail, this.type})
+  const CustomBottomSheet({Key key, this.moviedetail, this.type, this.id})
       : super(key: key);
   @override
   _CustomBottomSheetState createState() => _CustomBottomSheetState();
@@ -23,13 +29,15 @@ class _CustomBottomSheetState extends State<CustomBottomSheet>
   Animation<double> animation;
   AnimationController _controller;
 
+  
+
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration(microseconds: 100)).whenComplete(() {
       setState(() {
-        sheetClose = MediaQuery.of(context).size.height * 0.1;
-        sheetOpen = MediaQuery.of(context).size.height * 0.8;
+        sheetClose = MediaQuery.of(context).size.height * 0.2;
+        sheetOpen = MediaQuery.of(context).size.height * 0.76;
       });
       _controller = AnimationController(
           vsync: this, duration: Duration(milliseconds: 300));
@@ -78,6 +86,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet>
             },
             child: SheetContainer(
               type: widget.type,
+              id: widget.id,
               movieDetails: widget.moviedetail,
             ),
           ),
@@ -90,8 +99,9 @@ class _CustomBottomSheetState extends State<CustomBottomSheet>
 class SheetContainer extends StatefulWidget {
   final movieDetails;
   final type;
+  final id;
 
-  const SheetContainer({Key key, this.movieDetails, this.type})
+  const SheetContainer({Key key, this.movieDetails, this.type, this.id})
       : super(key: key);
 
   @override
@@ -99,6 +109,49 @@ class SheetContainer extends StatefulWidget {
 }
 
 class _SheetContainerState extends State<SheetContainer> {
+
+
+  
+
+  Future<Map> getTrailer() async {
+    var url =
+        "https://api.themoviedb.org/3/${widget.type}/${widget.id}?api_key=488b24a89214f602dec537c161df5303&append_to_response=credits,similar,videos";
+    http.Response response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      return Future.error("Failed to establish connection");
+    }
+  }
+
+ 
+
+   _launchURLTrailer(var videos) async {
+    if (videos.length != 0) {
+      String key;
+      for (int i = videos.length - 1; i >= 0; i--) {
+        if (videos[i]['type'] == 'Trailer') {
+          key = videos[i]['key'];
+          break;
+        }
+        continue;
+      }
+      String url = "https://www.youtube.com/embed/$key?autoplay=1";
+      if (await canLaunch(url)) {
+        await launch(url, forceSafariVC: false);
+      } else {
+        throw 'Could Not launch url';
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getTrailer();
+  }
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -124,7 +177,18 @@ class _SheetContainerState extends State<SheetContainer> {
                       children: <Widget>[
                         GenreTagLine(snapshot: snapshot),
                         Rating(snapshot: snapshot),
-                        ReleaseInfo(snapshot: snapshot),
+                        // ReleaseInfo(snapshot: snapshot),
+                        FutureBuilder(
+                          future: getTrailer(),
+                          builder: (context,AsyncSnapshot snapshot){
+                            return Padding(
+                              padding: const EdgeInsets.only(top:8.0),
+                              child: FloatingActionButton(onPressed: (){
+                                _launchURLTrailer(snapshot.data['videos']['results']);
+                              }, backgroundColor: Colors.red, child: Icon(LineIcons.youtube_play),),
+                            );
+
+                        }),
                         About(snapshot: snapshot),
                         Recommendation(iD: snapshot.data.id, type: widget.type)
                       ],

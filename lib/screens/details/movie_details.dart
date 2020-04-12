@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:moofies/screens/details/custom_sheet.dart';
 import 'package:moofies/services/api.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'bg_image.dart';
+
 
 class MovieDetails extends StatefulWidget {
   final AsyncSnapshot snapshot;
@@ -25,6 +29,8 @@ class _MovieDetailsState extends State<MovieDetails> {
     movieDetails =
         _api.getMovieInfo(widget.snapshot.data[widget.id].id, widget.type);
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +90,8 @@ class _MovieDetailsState extends State<MovieDetails> {
             child: CustomBottomSheet(
               type: widget.type,
               moviedetail: movieDetails,
+              id: widget.snapshot.data[widget.id].id,
+
             ),
             // ),
             // ),
