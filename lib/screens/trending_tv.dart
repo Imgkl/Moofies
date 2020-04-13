@@ -83,7 +83,7 @@ class _TrendingState extends State<TrendingTv> {
                                           type: widget.type,
                                           snapshot: snapshot,
                                           id: hitIndex,
-                                        )));
+                                        ), fullscreenDialog: true));
                               },
                               child: Hero(
                                 tag: snapshot.data[hitIndex],

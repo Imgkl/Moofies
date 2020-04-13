@@ -1,10 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moofies/screens/App/app.dart';
 
 
 
-void main() => runApp(MyApp());
+void main(){
+  WidgetsFlutterBinding.ensureInitialized();
+SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(// Color for Android
+statusBarColor: Colors.red
+),);
+SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+  .then((_) {
+runApp(MyApp());
+});
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -14,8 +25,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Moofies',
       theme: ThemeData(
+        cupertinoOverrideTheme: CupertinoThemeData(
+          brightness: Brightness.dark,
+        
+        ),
+        brightness: Brightness.light,
         canvasColor: Colors.white,
-        primarySwatch: Colors.blue,
         textTheme: GoogleFonts.ubuntuTextTheme(
       Theme.of(context).textTheme,
     ),
@@ -34,7 +49,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   bool userLoggedIn = false;
+
+ 
   @override
   Widget build(BuildContext context) {
     return App();

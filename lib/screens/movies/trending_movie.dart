@@ -83,7 +83,7 @@ class _TrendingMovieState extends State<TrendingMovie> {
                                       type: "movie",
                                           snapshot: snapshot,
                                           id: hitIndex,
-                                        )));
+                                        ), fullscreenDialog: true));
                               },
                               child: Hero(
                                 tag: snapshot.data[hitIndex],
