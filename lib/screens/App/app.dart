@@ -37,7 +37,7 @@ class _AppState extends State<App> {
 
     return SafeArea(
       bottom: false,
-          child: Scaffold( 
+      child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: <Widget>[
@@ -62,15 +62,26 @@ class _AppState extends State<App> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(right:28.0, bottom: 10),
+                      padding: const EdgeInsets.only(right: 28.0, bottom: 10),
                       child: Align(
                         alignment: Alignment.bottomRight,
-                        child: FloatingActionButton(
-                            foregroundColor: Colors.black,
-                            backgroundColor: Colors.white,
-                            child: isSwitched
-                                ? Icon(LineIcons.television)
-                                : Icon(LineIcons.ticket),
+                        child: FloatingActionButton.extended(
+                          
+                            foregroundColor: Colors.white,
+                            backgroundColor: Color(0xff2c362f),
+                            label: isSwitched
+                                ? Row(
+                                    children: <Widget>[
+                                      Icon(LineIcons.television),
+                                      Text(" TV")
+                                    ],
+                                  )
+                                : Row(
+                                    children: <Widget>[
+                                      Icon(LineIcons.ticket),
+                                      Text(" MOVIE")
+                                    ],
+                                  ),
                             onPressed: () {
                               setState(() {
                                 isSwitched = !isSwitched;
@@ -79,87 +90,72 @@ class _AppState extends State<App> {
                       ),
                     ),
                     HighlightNavigationBar(
-                      height: 100,
-                      icons: [
-                        IconButton(
-                            icon: Icon(LineIcons.home),
-                            onPressed: () {
-                              setState(() {
-                                _controller.jumpToPage(0);
-                              });
-                            }),
-                        IconButton(
-                            icon: Icon(LineIcons.search),
-                            onPressed: () {
-                              setState(() {
-                                _controller.jumpToPage(1);
-                              });
-                            }),
-                        IconButton(
-                            icon: Icon(LineIcons.user),
-                            onPressed: () {
-                              setState(() {
-                                _controller.jumpToPage(2);
-                              });
-                            }),
-                      ],
-                      onchanged: (int) {
-                        print(int);
-                      },
+                        height: 100,
+                        icons: [
+                          IconButton(
+                              icon: Icon(LineIcons.home),
+                              onPressed: () {
+                                setState(() {
+                                  _controller.jumpToPage(0);
+                                });
+                              }),
+                          IconButton(
+                              icon: Icon(LineIcons.search),
+                              onPressed: () {
+                                setState(() {
+                                  _controller.jumpToPage(1);
+                                });
+                              }),
+                          IconButton(
+                              icon: Icon(LineIcons.user),
+                              onPressed: () {
+                                setState(() {
+                                  _controller.jumpToPage(2);
+                                });
+                              }),
+                        ],
+                        onchanged: (int) {
+                          print(int);
+                        },
+                      
                     ),
                   ],
                 )),
           ],
         ),
-        // bottomNavigationBar: BottomAppBar(
-        //   child: Container(
-        //     height: screenHeight * 0.08,
-        //     child: Align(
-        //       alignment: Alignment.center,
-        //       child: Row(
-        //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //         children: <Widget>[
-        //           GestureDetector(
-        //             onTap: () {
-        //               setState(() {
-        //                 _controller.jumpToPage(0);
-        //               });
-        //             },
-        //             child: Column(
-        //               mainAxisAlignment: MainAxisAlignment.center,
-        //               children: <Widget>[Icon(LineIcons.home), Text("Home")],
-        //             ),
-        //           ),
-        //           GestureDetector(
-        //             onTap: () {
-        //               setState(() {
-        //                 _controller.jumpToPage(1);
-        //               });
-        //             },
-        //             child: Column(
-        //               mainAxisAlignment: MainAxisAlignment.center,
-        //               children: <Widget>[
-        //                 Icon(LineIcons.search),
-        //                 Text("Explore")
-        //               ],
-        //             ),
-        //           ),
-        //           GestureDetector(
-        //             onTap: () {
-        //               setState(() {
-        //                 _controller.jumpToPage(2);
-        //               });
-        //             },
-        //             child: Column(
-        //               mainAxisAlignment: MainAxisAlignment.center,
-        //               children: <Widget>[Icon(LineIcons.user), Text("You")],
-        //             ),
-        //           ),
-        //         ],
-        //       ),
-        //     ),
-        //   ),
-        // ),
+        //   bottomNavigationBar: BottomAppBar(
+        //     shape:CircularNotchedRectangle(),
+        //  child: HighlightNavigationBar(
+        //                 height: 100,
+        //                 icons: [
+        //                   IconButton(
+        //                       icon: Icon(LineIcons.home),
+        //                       onPressed: () {
+        //                         setState(() {
+        //                           _controller.jumpToPage(0);
+        //                         });
+        //                       }),
+        //                   IconButton(
+        //                       icon: Icon(LineIcons.search),
+        //                       onPressed: () {
+        //                         setState(() {
+        //                           _controller.jumpToPage(1);
+        //                         });
+        //                       }),
+        //                   IconButton(
+        //                       icon: Icon(LineIcons.user),
+        //                       onPressed: () {
+        //                         setState(() {
+        //                           _controller.jumpToPage(2);
+        //                         });
+        //                       }),
+        //                 ],
+        //                 onchanged: (int) {
+        //                   print(int);
+        //                 },
+        //               ),
+
+        //           )
       ),
     );
   }
