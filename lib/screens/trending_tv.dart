@@ -91,7 +91,7 @@ class _TrendingState extends State<TrendingTv> {
                                   shaderAvailable: false,
                                   imageUrl: Api().getPosterImage(
                                       snapshot.data[hitIndex].posterPath),
-                                  height: screenHeight * 0.4,
+                                  height: screenHeight * 0.5,
                                   width: screenWidth * 0.6,
                                   cornerRadius: 25,
                                   fit: BoxFit.cover,

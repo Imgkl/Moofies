@@ -174,6 +174,7 @@ class _SheetContainerState extends State<SheetContainer> {
                 if (snapshot.hasData) {
                   return SingleChildScrollView(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         GenreTagLine(snapshot: snapshot),
                         Rating(snapshot: snapshot),
@@ -183,9 +184,12 @@ class _SheetContainerState extends State<SheetContainer> {
                           builder: (context,AsyncSnapshot snapshot){
                             return Padding(
                               padding: const EdgeInsets.only(top:8.0),
-                              child: FloatingActionButton(onPressed: (){
-                                _launchURLTrailer(snapshot.data['videos']['results']);
-                              }, backgroundColor: Colors.red, child: Icon(LineIcons.youtube_play),),
+                              child: Align(
+                                alignment: Alignment.center,
+                                                              child: FloatingActionButton(onPressed: (){
+                                  _launchURLTrailer(snapshot.data['videos']['results']);
+                                }, backgroundColor: Colors.red, child: Icon(LineIcons.youtube_play),),
+                              ),
                             );
 
                         }),
