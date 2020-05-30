@@ -3,39 +3,64 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moofies/screens/App/app.dart';
+import 'package:wiredash/wiredash.dart';
 
-
-
-void main(){
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(// Color for Android
-statusBarColor: Colors.red
-),);
-SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-  .then((_) {
-runApp(MyApp());
-});
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle.dark.copyWith(
+        // Color for Android
+        statusBarColor: Colors.red),
+  );
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(MyApp());
+  });
+}
+
+class MyTranslations extends WiredashTranslationData {
+  String get feedbackStateIntroMsg =>
+      'I can’t wait to get your thoughts on my app. What would you like to do?';
+  String get feedbackModePraiseMsg =>
+      'Let me know what you really like about our app, maybe I can make it even better?';
+  String get feedbackStateFeedbackMsg =>
+      'I am listening. Please provide as much info as needed so I can help you.';
+  String get feedbackModeImprovementMsg =>
+      'Do you have an idea that would make our app better? I would love to know!';
+  String get feedbackModeBugMsg =>
+      'Let me know so I can forward this to our bug control, which is me. 😉';
 }
 
 class MyApp extends StatelessWidget {
+  final _navigatorKey = GlobalKey<NavigatorState>();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Moofies',
-      theme: ThemeData(
-        cupertinoOverrideTheme: CupertinoThemeData(
-          brightness: Brightness.dark,
-        
-        ),
-        brightness: Brightness.light,
-        canvasColor: Colors.white,
-        textTheme: GoogleFonts.ubuntuTextTheme(
-      Theme.of(context).textTheme,
-    ),
+    return Wiredash(
+      projectId: "moofies-x50s179",
+      secret: "nyuczm0g4950vj103p1gbi8mspi5acpa",
+      navigatorKey: _navigatorKey,
+      options: WiredashOptionsData(
+        showDebugFloatingEntryPoint: false,
       ),
-      home: MyHomePage(),
+      translation: MyTranslations(),
+      theme: WiredashThemeData(brightness: Brightness.dark),
+      child: MaterialApp(
+        navigatorKey: _navigatorKey,
+        debugShowCheckedModeBanner: false,
+        title: 'Moofies',
+        theme: ThemeData(
+          cupertinoOverrideTheme: CupertinoThemeData(
+            brightness: Brightness.dark,
+          ),
+          brightness: Brightness.light,
+          canvasColor: Colors.white,
+          textTheme: GoogleFonts.ubuntuTextTheme(
+            Theme.of(context).textTheme,
+          ),
+        ),
+        home: MyHomePage(),
+      ),
     );
   }
 }
@@ -49,10 +74,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   bool userLoggedIn = false;
 
- 
   @override
   Widget build(BuildContext context) {
     return App();

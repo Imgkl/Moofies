@@ -123,39 +123,6 @@ class _AppState extends State<App> {
                 )),
           ],
         ),
-        //   bottomNavigationBar: BottomAppBar(
-        //     shape:CircularNotchedRectangle(),
-        //  child: HighlightNavigationBar(
-        //                 height: 100,
-        //                 icons: [
-        //                   IconButton(
-        //                       icon: Icon(LineIcons.home),
-        //                       onPressed: () {
-        //                         setState(() {
-        //                           _controller.jumpToPage(0);
-        //                         });
-        //                       }),
-        //                   IconButton(
-        //                       icon: Icon(LineIcons.search),
-        //                       onPressed: () {
-        //                         setState(() {
-        //                           _controller.jumpToPage(1);
-        //                         });
-        //                       }),
-        //                   IconButton(
-        //                       icon: Icon(LineIcons.user),
-        //                       onPressed: () {
-        //                         setState(() {
-        //                           _controller.jumpToPage(2);
-        //                         });
-        //                       }),
-        //                 ],
-        //                 onchanged: (int) {
-        //                   print(int);
-        //                 },
-        //               ),
-
-        //           )
       ),
     );
   }

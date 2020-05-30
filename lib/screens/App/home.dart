@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
       resizeToAvoidBottomInset: false,
       extendBody: true,
       appBar: AppBar(
-        
+        centerTitle: true,
         backgroundColor: Colors.white,
         title: CupertinoSegmentedControl<int>(
           borderColor: Colors.black,
