@@ -15,6 +15,14 @@ class LocalStorage {
     prefs.setBool("status", loginStatus);
   }
 
+  static Future setEmail(String emailID) async {
+    prefs.setString("email", emailID);
+  }
+
+  static Future setUID(String uid) async {
+    prefs.setString("uid", uid);
+  }
+
   static Future setTrendingTab(bool tabStatus) async {
     prefs.setBool("trending", tabStatus);
   }
@@ -26,8 +34,19 @@ class LocalStorage {
   }
 
   static bool getTrendingTab() {
-    bool status =
+    bool trending =
         prefs.getBool("trending") != null ? prefs.getBool("trending") : false;
-    return status;
+    return trending;
+  }
+
+  static String getEmailID() {
+    String email =
+        prefs.getString("email") != null ? prefs.getString("email") : "";
+    return email;
+  }
+
+  static String getUID() {
+    String uid = prefs.getString("uid") != null ? prefs.getString("uid") : "";
+    return uid;
   }
 }
