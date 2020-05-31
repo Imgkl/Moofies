@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:moofies/screens/details/cast.dart';
 import 'package:moofies/screens/details/genre_and_tag_line.dart';
 import 'package:moofies/screens/details/about.dart';
 import 'package:moofies/screens/details/rating_bar.dart';
 import 'package:moofies/screens/details/recommendation.dart';
 import 'package:moofies/screens/details/release_info.dart';
+import 'package:moofies/screens/details/series_info.dart';
 import 'package:moofies/widgets/where_to_watch.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
@@ -167,14 +169,13 @@ class _SheetContainerState extends State<SheetContainer> {
                   return Container();
                 }
                 if (snapshot.hasData) {
-                  print("${snapshot.data.homePage}");
                   return SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         GenreTagLine(snapshot: snapshot),
                         Rating(snapshot: snapshot),
-                        // ReleaseInfo(snapshot: snapshot),
+                        widget.type=="tv"? SeriesInfo(snapshot: snapshot,): Container(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -238,9 +239,9 @@ class _SheetContainerState extends State<SheetContainer> {
                                 : Container(),
                           ],
                         ),
-
                         About(snapshot: snapshot),
-                        Recommendation(iD: snapshot.data.id, type: widget.type)
+                        CastDetails(snapshot: snapshot, type: widget.type),
+                        Recommendation(iD: snapshot.data.id, type: widget.type),
                       ],
                     ),
                   );

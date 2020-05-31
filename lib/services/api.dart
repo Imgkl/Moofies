@@ -76,7 +76,7 @@ Future<List<RecommendationModel>> getRecommendations(String type, int id) async 
   
 
   Future<MovieModel> getMovieInfo(int movieId, String type) async {
-    final response = await http.get("$url/$type/$movieId?api_key=$apiKey");
+    final response = await http.get("$url/$type/$movieId?api_key=$apiKey&append_to_response=credits");
 
     if (response.statusCode == 200) {
       return MovieModel.fromJson(json.decode(response.body));
