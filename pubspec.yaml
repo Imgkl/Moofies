@@ -40,6 +40,7 @@ dependencies:
   wiredash: ^0.1.0
   cloud_firestore: ^0.13.6
   firebase_messaging: ^6.0.16
+  flutter_neumorphic: ^2.2.2
 
   # The following adds the Cupertino Icons font to your applicatiomn.
   # Use with the CupertinoIcons class for iOS style icons.

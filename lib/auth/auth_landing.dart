@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:moofies/auth/auth.dart';
@@ -25,26 +26,34 @@ class _AuthLandingState extends State<AuthLanding> {
             child: Align(
               alignment: Alignment.bottomLeft,
               child: InkWell(
-                child: Shimmer.fromColors(
-                  baseColor: Colors.black,
-                  highlightColor: Colors.white,
-                  child: DragTarget(
-                    builder:
-                        (context, List<String> candidateData, rejectedData) {
-                      return Platform.isIOS
-                          ? Icon(
-                              FontAwesomeIcons.apple,
-                              size: 30,
-                            )
-                          : Icon(
-                              FontAwesomeIcons.facebookF,
-                              size: 30,
-                            );
-                    },
-                    onAccept: (data) {
-                      print("apple");
-                    },
-                  ),
+                child: DragTarget(
+                  builder: (context, List<String> candidateData, rejectedData) {
+                    return Platform.isIOS
+                        ? NeumorphicButton(
+                            isEnabled: false,
+                            boxShape: NeumorphicBoxShape.roundRect(
+                                BorderRadius.all(Radius.circular(90))),
+                            style: NeumorphicStyle(
+                                shape: NeumorphicShape.concave,
+                                depth: 100,
+                                lightSource: LightSource.topLeft,
+                                color: Colors.grey),
+                            child: Shimmer.fromColors(
+                              child: Icon(
+                                FontAwesomeIcons.apple,
+                                size: 30,
+                              ),
+                              baseColor: Colors.black,
+                              highlightColor: Colors.white,
+                            ))
+                        : Icon(
+                            FontAwesomeIcons.facebookF,
+                            size: 30,
+                          );
+                  },
+                  onAccept: (data) {
+                    print("apple");
+                  },
                 ),
               ),
             ),
@@ -74,11 +83,14 @@ class _AuthLandingState extends State<AuthLanding> {
                       ),
                     ),
                   ),
-                  child: Text(
+                  child: NeumorphicText(
                     "Sign in",
-                    style: TextStyle(
-                      color: Colors.black,
+                    textStyle: NeumorphicTextStyle(
                       fontSize: 30,
+                    ),
+                    style: NeumorphicStyle(
+                      color: Colors.black,
+                      depth: 3
                     ),
                   ),
                 )),
@@ -87,44 +99,58 @@ class _AuthLandingState extends State<AuthLanding> {
             padding: const EdgeInsets.only(bottom: 150.0, right: 20),
             child: Align(
               alignment: Alignment.bottomRight,
-              child: Shimmer.fromColors(
-                baseColor: Colors.black,
-                highlightColor: Colors.white,
-                child: DragTarget(
-                  builder: (BuildContext context, List<String> incoming, List rejected) {
-                    return Shimmer.fromColors(
+              child: DragTarget(
+                builder: (BuildContext context, List<String> incoming,
+                    List rejected) {
+                  return NeumorphicButton(
+                    onPressed: () {
+                      signInUsingGoogle();
+                    },
+                    boxShape: NeumorphicBoxShape.roundRect(
+                        BorderRadius.all(Radius.circular(90))),
+                    style: NeumorphicStyle(
+                        shape: NeumorphicShape.concave,
+                        depth: 100,
+                        lightSource: LightSource.topLeft,
+                        color: Colors.grey),
+                    child: Shimmer.fromColors(
                       baseColor: Colors.black,
                       highlightColor: Colors.white,
                       child: Icon(
                         FontAwesomeIcons.google,
-                        size: 30,
+                        size: 27,
                       ),
-                    );
-                  },
-                  onWillAccept: (data) => data == '👆🏻',
-                  onAccept: (data) {
-                    signInWithGoogle().then((data) {
-                      setState(() {
-                        LocalStorage.setUserLoggedIn(true);
-                      });
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          '/app', (Route<dynamic> route) => false);
-                    }).catchError((e) {
-                      print(e);setState(() {
-                        LocalStorage.setUserLoggedIn(false);
-                      });
-                    });
-                    // signOutGoogle();
-                  },
-                  // onAccept: (data) {
-                  //   print("Google");
-                  // },
-                ),
+                    ),
+                  );
+                },
+                onWillAccept: (data) => data == '👆🏻',
+                onAccept: (data) {
+                  signInUsingGoogle();
+                  // signOutGoogle();
+                },
+                // onAccept: (data) {
+                //   print("Google");
+                // },
               ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  signInUsingGoogle() {
+    signInWithGoogle().then((data) {
+      setState(() {
+        LocalStorage.setUserLoggedIn(true);
+      });
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/app', (Route<dynamic> route) => false);
+    }).catchError((e) {
+      print(e);
+      setState(() {
+        LocalStorage.setUserLoggedIn(false);
+      });
+    });
   }
 }
