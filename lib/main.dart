@@ -9,11 +9,6 @@ import 'package:wiredash/wiredash.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle.dark.copyWith(
-        // Color for Android
-        statusBarColor: Colors.red),
-  );
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     LocalStorage.initilize().then((value) => runApp(MyApp()));
