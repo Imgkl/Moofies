@@ -61,7 +61,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                     )),
 
                 margin: const EdgeInsets.only(
-                    bottom: 6.0), //Same as `blurRadius` i guess
+                    bottom: 6.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40.0),
                   color: Colors.white,

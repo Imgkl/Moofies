@@ -20,10 +20,10 @@ class _SearchState extends State<SearchTV> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-         backgroundColor: Colors.white,
-         elevation: 0,
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
-          body: Column(
+      body: Column(
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(20.0),
@@ -66,12 +66,13 @@ class _SearchState extends State<SearchTV> {
                     } else if (snapshot.connectionState ==
                         ConnectionState.waiting) {
                       return Center(child: Image.asset("assets/waiting.png"));
-                    } else if (snapshot.connectionState == ConnectionState.none) {
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.none) {
                       return Center(child: Image.asset("assets/search.png"));
-                    } else if(snapshot.data.length == 0){
-                       return Center(child: Image.asset("assets/error.png"));
-                    }
-                    else if (snapshot.connectionState == ConnectionState.done &&
+                    } else if (snapshot.data.length == 0) {
+                      return Center(child: Image.asset("assets/error.png"));
+                    } else if (snapshot.connectionState ==
+                            ConnectionState.done &&
                         snapshot.hasData &&
                         snapshot.data != null) {
                       return Expanded(
@@ -85,24 +86,31 @@ class _SearchState extends State<SearchTV> {
                             itemCount: snapshot.data.length,
                             shrinkWrap: false,
                             itemBuilder: (ctx, pos) {
-                              return Card(
-                                  child: GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => MovieDetails(
-                                            snapshot: snapshot,
-                                            type: widget.type,
-                                            id: pos,
-                                          )));
-                                },
-                                child: Image.network(
-                                  snapshot.data[pos].posterPath != null
-                                      ? Api().getPosterImage(
-                                          snapshot.data[pos].posterPath)
-                                      : "https://kicksdigitalmarketing.com/wp-content/uploads/2019/09/iStock-1142986365.jpg",
-                                  fit: BoxFit.fitHeight,
-                                ),
-                              ));
+                              return ClipRRect(
+                                borderRadius: BorderRadius.circular(30),
+                                child: Card(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                            builder: (context) => MovieDetails(
+                                                  snapshot: snapshot,
+                                                  type: widget.type,
+                                                  id: pos,
+                                                )));
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Image.network(
+                                      snapshot.data[pos].posterPath != null
+                                          ? Api().getPosterImage(
+                                              snapshot.data[pos].posterPath)
+                                          : "https://kicksdigitalmarketing.com/wp-content/uploads/2019/09/iStock-1142986365.jpg",
+                                      fit: BoxFit.fitHeight,
+                                    ),
+                                  ),
+                                )),
+                              );
                             }),
                       );
                     }

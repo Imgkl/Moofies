@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:moofies/screens/details/genre_and_tag_line.dart';
 import 'package:moofies/screens/details/about.dart';
 import 'package:moofies/screens/details/rating_bar.dart';
 import 'package:moofies/screens/details/recommendation.dart';
 import 'package:moofies/screens/details/release_info.dart';
+import 'package:moofies/widgets/where_to_watch.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,8 +30,6 @@ class _CustomBottomSheetState extends State<CustomBottomSheet>
   bool isExpanded = false;
   Animation<double> animation;
   AnimationController _controller;
-
-  
 
   @override
   void initState() {
@@ -109,10 +109,6 @@ class SheetContainer extends StatefulWidget {
 }
 
 class _SheetContainerState extends State<SheetContainer> {
-
-
-  
-
   Future<Map> getTrailer() async {
     var url =
         "https://api.themoviedb.org/3/${widget.type}/${widget.id}?api_key=488b24a89214f602dec537c161df5303&append_to_response=credits,similar,videos";
@@ -125,9 +121,7 @@ class _SheetContainerState extends State<SheetContainer> {
     }
   }
 
- 
-
-   _launchURLTrailer(var videos) async {
+  _launchURLTrailer(var videos) async {
     if (videos.length != 0) {
       String key;
       for (int i = videos.length - 1; i >= 0; i--) {
@@ -152,6 +146,7 @@ class _SheetContainerState extends State<SheetContainer> {
     super.initState();
     getTrailer();
   }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -172,6 +167,7 @@ class _SheetContainerState extends State<SheetContainer> {
                   return Container();
                 }
                 if (snapshot.hasData) {
+                  print("${snapshot.data.homePage}");
                   return SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,20 +175,70 @@ class _SheetContainerState extends State<SheetContainer> {
                         GenreTagLine(snapshot: snapshot),
                         Rating(snapshot: snapshot),
                         // ReleaseInfo(snapshot: snapshot),
-                        FutureBuilder(
-                          future: getTrailer(),
-                          builder: (context,AsyncSnapshot snapshot){
-                            return Padding(
-                              padding: const EdgeInsets.only(top:8.0),
-                              child: Align(
-                                alignment: Alignment.center,
-                                                              child: FloatingActionButton(onPressed: (){
-                                  _launchURLTrailer(snapshot.data['videos']['results']);
-                                }, backgroundColor: Colors.red, child: Icon(LineIcons.youtube_play),),
-                              ),
-                            );
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            FutureBuilder(
+                                future: getTrailer(),
+                                builder: (context, AsyncSnapshot snapshot) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: FloatingActionButton(
+                                        onPressed: () {
+                                          _launchURLTrailer(snapshot
+                                              .data['videos']['results']);
+                                        },
+                                        backgroundColor: Colors.red,
+                                        child: Icon(LineIcons.youtube_play),
+                                      ),
+                                    ),
+                                  );
+                                }),
+                            snapshot.data.homePage.length > 2
+                                ? Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        launch(snapshot.data.homePage,
+                                            forceSafariVC: false);
+                                      },
+                                      child: Material(
+                                        elevation: 0,
+                                        child: Container(
+                                            color: Colors.transparent,
+                                            child: snapshot.data.homePage
+                                                    .contains("netflix")
+                                                ? WhereToWatch(
+                                                    path: "assets/netflix.png",
+                                                  )
+                                                : snapshot.data.homePage
+                                                        .contains("amazon")
+                                                    ? WhereToWatch(
+                                                        path:
+                                                            "assets/amazon.png")
+                                                    : snapshot.data.homePage
+                                                            .contains("disney")
+                                                        ? WhereToWatch(
+                                                            path:
+                                                                "assets/hotstar.png")
+                                                        : snapshot.data.homePage
+                                                                .contains(
+                                                                    "apple")
+                                                            ? WhereToWatch(
+                                                                path:
+                                                                    "assets/apple.png")
+                                                            : WhereToWatch(
+                                                                notGeneric:
+                                                                    false)),
+                                      ),
+                                    ),
+                                  )
+                                : Container(),
+                          ],
+                        ),
 
-                        }),
                         About(snapshot: snapshot),
                         Recommendation(iD: snapshot.data.id, type: widget.type)
                       ],

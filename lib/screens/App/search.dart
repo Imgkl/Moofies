@@ -87,7 +87,7 @@ class _SearchState extends State<Search> {
                             shrinkWrap: false,
                             itemBuilder: (ctx, pos) {
                               return ClipRRect(
-                                borderRadius: BorderRadius.circular(35),
+                                borderRadius: BorderRadius.circular(30),
                                 child: Card(
                                     elevation: 0,
                                     child: GestureDetector(

@@ -37,7 +37,6 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     print(isSwitched);
-//this goes in as one of the children in our column
 
     return SafeArea(
       bottom: false,

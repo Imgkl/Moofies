@@ -1,5 +1,5 @@
 class MovieModel {
-  final String original_title, overview, poster_path, country, releaseDate, tagLine, overView, videos;
+  final String original_title, overview, poster_path, country, releaseDate, tagLine, overView, videos, homePage;
   final int id, runTime;
   final double rating;
   final List genre;
@@ -7,7 +7,7 @@ class MovieModel {
       {this.country,
       this.rating,
       this.genre,
-
+      this.homePage,
       this.releaseDate,
       this.runTime,
       this.original_title,
@@ -28,7 +28,8 @@ class MovieModel {
       runTime: json['runtime'],
       genre: json['genres'],
       rating: json['vote_average'],
-      videos: json['videos']
+      videos: json['videos'],
+      homePage: json["homepage"],
     );
   }
 }
