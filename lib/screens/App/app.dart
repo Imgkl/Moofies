@@ -8,6 +8,7 @@ import 'package:moofies/screens/App/search.dart';
 import 'package:moofies/screens/TV/home_tv.dart';
 import 'package:moofies/screens/TV/search_tv.dart';
 import 'package:moofies/services/api.dart';
+import 'package:moofies/services/prefs.dart';
 import 'package:moofies/widgets/bottom_navBar.dart';
 
 class App extends StatefulWidget {
@@ -27,6 +28,9 @@ class _AppState extends State<App> {
     super.initState();
     _api = Api();
     genreList = _api.getGenreList();
+    setState(() {
+      isSwitched = LocalStorage.getTrendingTab();
+    });
   }
 
   @override
@@ -85,6 +89,7 @@ class _AppState extends State<App> {
                             onPressed: () {
                               setState(() {
                                 isSwitched = !isSwitched;
+                                LocalStorage.setTrendingTab(isSwitched);
                               });
                             }),
                       ),

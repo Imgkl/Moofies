@@ -15,9 +15,19 @@ class LocalStorage {
     prefs.setBool("status", loginStatus);
   }
 
+  static Future setTrendingTab(bool tabStatus) async {
+    prefs.setBool("trending", tabStatus);
+  }
+
   static bool getUserLoggedIn() {
     bool status =
         prefs.getBool("status") != null ? prefs.getBool("status") : false;
+    return status;
+  }
+
+  static bool getTrendingTab() {
+    bool status =
+        prefs.getBool("trending") != null ? prefs.getBool("trending") : false;
     return status;
   }
 }
