@@ -34,22 +34,30 @@ class _RecommendationState extends State<Recommendation> {
     return showHeading
         ? Padding(
             padding: const EdgeInsets.only(
-              left: 15.0,
-              right: 15,
-              bottom: 50,
+
+              bottom: 90,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  "Recommended",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 30,
-                  ),
-                ),
                 Padding(
+                  padding: const EdgeInsets.only(
+                    left: 15.0,
+                    right: 15,
+                  ),
+                  child: Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Recommended",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30,
+                        ),
+                      ),
+                      Padding(
                   padding: const EdgeInsets.only(top: 5.0),
                   child: Container(
                     width: screenWidth * 0.55,
@@ -63,6 +71,10 @@ class _RecommendationState extends State<Recommendation> {
                     ),
                   ),
                 ),
+                    ],
+                  ),
+                ),
+                
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Container(
@@ -96,7 +108,7 @@ class _RecommendationState extends State<Recommendation> {
                                                 )));
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.only(right: 20.0),
+                                    padding: const EdgeInsets.only(left: 15.0, right: 1),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       crossAxisAlignment:

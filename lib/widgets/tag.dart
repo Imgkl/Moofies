@@ -12,7 +12,7 @@ class Tag extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Text("$tagName"),
-           Text("$data")
+           Text(" $data")
         ],
       ),
     );

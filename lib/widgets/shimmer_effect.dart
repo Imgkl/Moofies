@@ -8,6 +8,7 @@ class ShimmerImage extends StatefulWidget {
   final double elevation;
   final double height;
   final BoxFit fit;
+  final bool enabled; 
   final bool shaderAvailable;
   final double cornerRadius;
 
@@ -18,7 +19,7 @@ class ShimmerImage extends StatefulWidget {
       this.height,
       this.fit,
       this.cornerRadius,
-      this.shaderAvailable, this.elevation = 0})
+      this.shaderAvailable, this.elevation = 0, this.enabled = true})
       : super(key: key);
   @override
   _ShimmerImageState createState() => _ShimmerImageState();
@@ -47,6 +48,7 @@ class _ShimmerImageState extends State<ShimmerImage> {
         child: Stack(
           children: <Widget>[
             Shimmer.fromColors(
+              enabled: widget.enabled,
               direction: ShimmerDirection.ltr,
               baseColor: Colors.transparent,
               highlightColor: Colors.white,

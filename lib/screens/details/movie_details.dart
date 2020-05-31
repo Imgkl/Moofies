@@ -68,7 +68,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey,
-                      offset: Offset(0.0, 1.0), //(x,y)
+                      offset: Offset(0.0, 1.0),
                       blurRadius: 6.0,
                     ),
                   ],
@@ -77,59 +77,14 @@ class _MovieDetailsState extends State<MovieDetails> {
             ),
           ),
           FractionallySizedBox(
-            // alignment: Alignment.bottomCenter,
-            // heightFactor: 0.45,
-            // child: Material(
-            //   color: Colors.transparent,
-            //   elevation: 3,
-            //   child: Container(
-            //     decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.only(
-            //           topLeft: Radius.circular(40),
-            //           topRight: Radius.circular(40)),
-            //       color: Colors.white,
-            //     ),
-            //  child: FutureBuilder(
-            //    future: movieDetails,
-            //    builder: (context, snapshot) {
-            //      if (!snapshot.hasData) {
-            //        return CircularProgressIndicator();
-            //      }
-            //      if (snapshot.hasData) {
-            //        return Column(
-            //          children: <Widget>[
-            //            GenreTagLine(snapshot: snapshot),4
-            //            Rating(snapshot: snapshot),
-            //            ReleaseInfo(snapshot: snapshot),
-            //            About(snapshot: snapshot),
-            //          ],
-            //        );
-            //      }
-            //      if (snapshot.hasError) {
-            //        return CircularProgressIndicator(
-            //          strokeWidth: 1,
-            //        );
-            //      }
-            //      return CircularProgressIndicator(
-            //        strokeWidth: 1,
-            //      );
-            //    }),
             child: CustomBottomSheet(
               type: widget.type,
               moviedetail: movieDetails,
               id: widget.snapshot.data[widget.id].id,
             ),
-            // ),
-            // ),
           ),
         ],
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // floatingActionButton: FabButton(),
-      // bottomNavigationBar: BottomAppBar(
-      //     shape: CircularNotchedRectangle(),
-      //     notchMargin: 5.0,
-      //     child: BottomBar())
     );
   }
 }
