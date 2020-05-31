@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:moofies/auth/auth_landing.dart';
 import 'package:moofies/screens/App/app.dart';
+import 'package:moofies/services/prefs.dart';
 import 'package:wiredash/wiredash.dart';
 
 void main() {
@@ -14,7 +16,7 @@ void main() {
   );
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
-    runApp(MyApp());
+    LocalStorage.initilize().then((value) => runApp(MyApp()));
   });
 }
 
@@ -60,6 +62,10 @@ class MyApp extends StatelessWidget {
           ),
         ),
         home: MyHomePage(),
+        routes: {
+                    "/app": (_) => App(),
+                    "/auth": (_) => AuthLanding(),
+                  },
       ),
     );
   }
@@ -68,16 +74,22 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   bool userLoggedIn = false;
+@override
+  void initState() {
+    super.initState();
+    setState(() {
+      userLoggedIn = LocalStorage.getUserLoggedIn();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return App();
+    return userLoggedIn? App(): AuthLanding();
   }
 }

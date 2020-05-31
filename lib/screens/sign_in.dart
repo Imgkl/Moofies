@@ -15,10 +15,10 @@ class SignIn extends StatelessWidget {
       ),
       body: Center(
         child: RaisedButton(child: Text("Log out"), onPressed: (){
-          signOutGoogle().whenComplete((){
-          LocalStorage.setUserLoggedIn(false);
-            Navigator.of(context).pop();
-          });
+          // signOutGoogle().whenComplete((){
+          // LocalStorage.setUserLoggedIn(false);
+          //   Navigator.of(context).pop();
+          // });
         },)
       ),
     );

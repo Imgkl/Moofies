@@ -2,9 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
   static SharedPreferences prefs;
-  static List<String> suggestions = [];
-  static List<String> tipsuggestions = [];
-  static List<String> assignmentSuggestions = [];
 
   static Future initilize() async {
     try {
@@ -14,12 +11,13 @@ class LocalStorage {
     }
   }
 
-  static Future setUserLoggedIn(bool status) async {
-    prefs.setBool("status", status);
+  static Future setUserLoggedIn(bool loginStatus) async {
+    prefs.setBool("status", loginStatus);
   }
 
-    static bool getUserLoggedIn() {
-    bool status = prefs.getBool("status");
+  static bool getUserLoggedIn() {
+    bool status =
+        prefs.getBool("status") != null ? prefs.getBool("status") : false;
     return status;
   }
 }

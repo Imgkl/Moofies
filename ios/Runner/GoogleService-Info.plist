@@ -6,6 +6,8 @@
 	<string>856411458637-ttvn726uk5h62k95dhbaku743oiplpmh.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.856411458637-ttvn726uk5h62k95dhbaku743oiplpmh</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>856411458637-g2idlc4nhe0jth0fjj31ag92ak701hqd.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCWJt691S_GPmWu2tc69S-6zeeObE49rXg</string>
 	<key>GCM_SENDER_ID</key>
@@ -29,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:856411458637:ios:af12c7b21df9a7cc4e2004</string>
+	<string>1:856411458637:ios:27108f2a913fdda84e2004</string>
 	<key>DATABASE_URL</key>
 	<string>https://moofies.firebaseio.com</string>
 </dict>

@@ -11,10 +11,10 @@ class LogIn extends StatelessWidget {
         child: RaisedButton(
           child: Text("Google Sign In"),
           onPressed: () {
-            signInWithGoogle().whenComplete((){
-              LocalStorage.setUserLoggedIn(true);
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> SignIn(apptitle: "Moofies")));
-            });
+            // signInWithGoogle().whenComplete((){
+            //   LocalStorage.setUserLoggedIn(true);
+            //   Navigator.of(context).push(MaterialPageRoute(builder: (context)=> SignIn(apptitle: "Moofies")));
+            // });
           },
         ),
       ),
